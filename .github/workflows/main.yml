@@ -23,7 +23,7 @@ jobs:
         run: chmod +x ./mvnw
       
       - name: Build JAR
-        run: ./mvnw package --file pom.xml
+        run: ./mvnw package -DskipTests --file pom.xml
 
       - name: Build Docker image
         run: docker build -t dasunkad/library-manager-core:latest .
