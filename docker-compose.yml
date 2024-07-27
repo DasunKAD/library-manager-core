@@ -14,7 +14,7 @@ services:
 
   app:
     build: .  # Build the application from the Dockerfile in the current directory
-    image: dasunkad/library-manager-core:latest
+    image: dasunkad/library-manager-core:0.0.4
     container_name: library-manager-core  # Name of the application container
     ports:
       - 8080:8080  # Map port 8080 of the container to port 8080 on the host
