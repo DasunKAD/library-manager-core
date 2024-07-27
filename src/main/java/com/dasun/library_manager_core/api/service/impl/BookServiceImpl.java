@@ -1,18 +1,13 @@
 package com.dasun.library_manager_core.api.service.impl;
 
 import com.dasun.library_manager_core.api.dto.BookDto;
-import com.dasun.library_manager_core.api.dto.BorrowerDto;
 import com.dasun.library_manager_core.api.entity.Book;
 import com.dasun.library_manager_core.api.entity.BookDetails;
-import com.dasun.library_manager_core.api.entity.Borrower;
 import com.dasun.library_manager_core.api.mapper.BookDetailsMapper;
 import com.dasun.library_manager_core.api.mapper.BookMapper;
-import com.dasun.library_manager_core.api.mapper.BorrowerMapper;
 import com.dasun.library_manager_core.api.repository.BookDetailsRepository;
 import com.dasun.library_manager_core.api.repository.BookRepository;
-import com.dasun.library_manager_core.api.repository.BorrowerRepository;
 import com.dasun.library_manager_core.api.service.BookService;
-import com.dasun.library_manager_core.api.service.BorrowerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -35,7 +30,6 @@ public class BookServiceImpl implements BookService {
     public BookDto addBook(BookDto bookDto) {
         // Log the start of the book addition process with the provided ISBN
         log.info("Attempting to add book with ISBN: {}", bookDto.getIsbn());
-
         // Check if a book with the same ISBN already exists in the repository
         Optional<BookDetails> existingBookDetails = bookDetailsRepository.findByIsbn(bookDto.getIsbn());
 
@@ -51,7 +45,8 @@ public class BookServiceImpl implements BookService {
         } else {
             // If no existing book is found, create a new BookDetails entity
             log.info("No existing book found with ISBN {}. Creating a new book entry.", bookDto.getIsbn());
-            BookDetails bookDetails = BookDetailsMapper.toBookDetails(bookDto);
+            BookDetailsMapper bookDetailsMapper = BookDetailsMapper.INSTANCE;
+            BookDetails bookDetails = bookDetailsMapper.toBookDetails(bookDto);
             existingBookDetails = Optional.of(bookDetailsRepository.save(bookDetails));
         }
 
@@ -64,7 +59,8 @@ public class BookServiceImpl implements BookService {
         log.info("Book with ISBN {} has been added successfully with ID: {}", bookDto.getIsbn(), book.getId());
 
         // Convert the saved Book entity to a BookDto and return it
-        return BookMapper.toBookDto(book);
+        BookMapper bookMapper = BookMapper.INSTANCE;
+        return bookMapper.bookToBookDto(book);
     }
 
     @Override
@@ -78,7 +74,8 @@ public class BookServiceImpl implements BookService {
         Page<Book> bookPage = bookRepository.findAll(pageable);
 
         // Convert Page<Book> to Page<BookDto> using BookMapper
-        Page<BookDto> bookDtoPage = bookPage.map(BookMapper::toBookDto);
+        BookMapper bookMapper = BookMapper.INSTANCE;
+        Page<BookDto> bookDtoPage = bookPage.map(bookMapper::bookToBookDto);
 
         log.info("Fetched {} books from page {} with size {}", bookDtoPage.getNumberOfElements(), page, size);
 
@@ -99,8 +96,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> getBooksByAvailability(boolean availability) {
         List<Book> availableBooks = bookRepository.findByIsBorrowed(availability);
+        BookMapper bookMapper = BookMapper.INSTANCE;
         return availableBooks.stream()
-                .map(BookMapper::toBookDto)
+                .map(bookMapper::bookToBookDto)
                 .toList();
     }
 

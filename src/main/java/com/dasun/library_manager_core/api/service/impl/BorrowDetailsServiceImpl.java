@@ -63,7 +63,8 @@ public class BorrowDetailsServiceImpl implements BorrowDetailsService {
         log.info("Saved new borrow details to repository");
 
         // Convert the saved BorrowRecord entity to a DTO and return it
-        BorrowerDetailsDto borrowerDetailsDtoResult = BorrowerDetailsMapper.toDto(savedBorrowDetails);
+
+        BorrowerDetailsDto borrowerDetailsDtoResult = BorrowerDetailsMapper.INSTANCE.toDto(savedBorrowDetails);
         log.info("Converted saved borrow details to DTO: {}", borrowerDetailsDtoResult);
 
         return borrowerDetailsDtoResult;
@@ -105,7 +106,7 @@ public class BorrowDetailsServiceImpl implements BorrowDetailsService {
         log.info("Saved updated borrow details to repository");
 
         // Convert the updated BorrowDetails entity to a DTO and return it
-        BorrowerDetailsDto borrowerDetailsDtoResult = BorrowerDetailsMapper.toDto(savedBorrowDetails);
+        BorrowerDetailsDto borrowerDetailsDtoResult = BorrowerDetailsMapper.INSTANCE.toDto(savedBorrowDetails);
         log.info("Converted updated borrow details to DTO: {}", borrowerDetailsDtoResult);
 
         return borrowerDetailsDtoResult;

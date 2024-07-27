@@ -5,20 +5,11 @@ import com.dasun.library_manager_core.api.entity.Borrower;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+@Mapper
+public interface BorrowerMapper {
+    BorrowerMapper INSTANCE = Mappers.getMapper(BorrowerMapper.class);
 
-public class BorrowerMapper {
-    public static BorrowerDto borrowerToBorrowerDto(Borrower borrower){
-        BorrowerDto borrowerDto = new BorrowerDto();
-        borrowerDto.setName(borrower.getName());
-        borrowerDto.setEmail(borrower.getEmail());
-        borrowerDto.setId(borrower.getId());
-        return borrowerDto;
-    }
+    BorrowerDto borrowerToBorrowerDto(Borrower borrower);
 
-    public static Borrower borrowerDtoToBorrower(BorrowerDto borrowerDto){
-        Borrower borrower = new Borrower();
-        borrower.setName(borrowerDto.getName());
-        borrower.setEmail(borrowerDto.getEmail());
-        return borrower;
-    }
+    Borrower borrowerDtoToBorrower(BorrowerDto borrowerDto);
 }

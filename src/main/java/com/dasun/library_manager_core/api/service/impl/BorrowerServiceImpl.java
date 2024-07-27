@@ -23,7 +23,7 @@ public class BorrowerServiceImpl implements BorrowerService {
         log.info("Starting the process to create a new borrower.");
 
         // Convert BorrowerDto to Borrower entity
-        Borrower newBorrower = BorrowerMapper.borrowerDtoToBorrower(borrowerDto);
+        Borrower newBorrower = BorrowerMapper.INSTANCE.borrowerDtoToBorrower(borrowerDto);
         log.debug("Converted BorrowerDto to Borrower entity: {}", newBorrower);
 
         // Save the Borrower entity to the repository
@@ -31,7 +31,7 @@ public class BorrowerServiceImpl implements BorrowerService {
         log.info("Saved new borrower to the repository with ID: {}", savedBorrower.getId());
 
         // Convert the saved Borrower entity back to BorrowerDto
-        BorrowerDto savedBorrowerDto = BorrowerMapper.borrowerToBorrowerDto(savedBorrower);
+        BorrowerDto savedBorrowerDto = BorrowerMapper.INSTANCE.borrowerToBorrowerDto(savedBorrower);
         log.debug("Converted saved Borrower entity to BorrowerDto: {}", savedBorrowerDto);
 
         return savedBorrowerDto;
@@ -65,7 +65,7 @@ public class BorrowerServiceImpl implements BorrowerService {
         log.debug("Retrieved Borrower entity: {}", borrower);
 
         // Convert the Borrower entity to BorrowerDto
-        BorrowerDto borrowerDto = BorrowerMapper.borrowerToBorrowerDto(borrower);
+        BorrowerDto borrowerDto = BorrowerMapper.INSTANCE.borrowerToBorrowerDto(borrower);
         log.debug("Converted Borrower entity to BorrowerDto: {}", borrowerDto);
 
         return borrowerDto;
