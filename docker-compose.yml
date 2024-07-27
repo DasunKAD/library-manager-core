@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:12
+    restart: always  # Always restart the container if it stops
+    container_name: library-manager-db
+    environment:
+      POSTGRES_PASSWORD: E5&kZ*3r^Wq7
+      POSTGRES_DB: library_core
+      POSTGRES_USER: postgres
+    volumes:
+      - ./db-init:/docker-entrypoint-initdb.d  # Initialize database with scripts from this directory
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port
+
+  app:
+    build: .  # Build the application from the Dockerfile in the current directory
+    container_name: library-manager-core  # Name of the application container
+    ports:
+      - 8080:8080  # Map port 8080 of the container to port 8080 on the host
+
+    restart: on-failure  # Restart the container only if it fails
+    depends_on:
+      - db  # Ensure the database service starts before the app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/library_core
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: E5&kZ*3r^Wq7
+    volumes:
+      - logs:/app/logs  # Persist application logs to a named volume
+    #command: ["/wait-for-script.sh", "db:5432", "java", "-jar", "target/book-manager-app-0.0.1-SNAPSHOT.jar"]
+    # Uncomment and adjust the command if you need to wait for the database to be ready before starting the app
+
+volumes:
+  logs:  # Named volume for persisting logs

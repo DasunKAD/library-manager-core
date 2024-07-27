@@ -12,6 +12,7 @@ import com.dasun.library_manager_core.api.repository.BorrowDetailsRepository;
 import com.dasun.library_manager_core.api.repository.BorrowerRepository;
 import com.dasun.library_manager_core.api.service.BookService;
 import com.dasun.library_manager_core.api.service.BorrowDetailsService;
+import com.dasun.library_manager_core.api.service.impl.BorrowDetailsServiceImpl;
 import com.dasun.library_manager_core.util.CommonUtils;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BorrowDetailsServiceTest {
+class BorrowDetailsServiceTest {
     @Mock
     private BorrowerDetailsMapper mapper;
 
@@ -50,7 +51,7 @@ public class BorrowDetailsServiceTest {
 
 
     @InjectMocks
-    private BorrowDetailsService service;
+    private BorrowDetailsServiceImpl service;
 
     @BeforeEach
     void setUp() {

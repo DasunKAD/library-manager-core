@@ -6,6 +6,7 @@ import com.dasun.library_manager_core.api.entity.BookDetails;
 import com.dasun.library_manager_core.api.repository.BookDetailsRepository;
 import com.dasun.library_manager_core.api.repository.BookRepository;
 import com.dasun.library_manager_core.api.service.BookService;
+import com.dasun.library_manager_core.api.service.impl.BookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookServiceTest {
+class BookServiceTest {
     @Mock
     private BookRepository bookRepository;
 
     @InjectMocks
-    private BookService bookService;
+    private BookServiceImpl bookService;
 
     @Mock
     private BookDetailsRepository bookDetailsRepository;
@@ -149,7 +150,7 @@ public class BookServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
