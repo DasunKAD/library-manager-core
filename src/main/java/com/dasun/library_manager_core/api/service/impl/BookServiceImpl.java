@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -94,4 +95,13 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(Long bookId) {
 
     }
+
+    @Override
+    public List<BookDto> getBooksByAvailability(boolean availability) {
+        List<Book> availableBooks = bookRepository.findByIsBorrowed(availability);
+        return availableBooks.stream()
+                .map(BookMapper::toBookDto)
+                .toList();
+    }
+
 }

@@ -34,6 +34,10 @@ public abstract class PersistedObject {
 
     }
 
+    public PersistedObject(long id) {
+        this.id = id;
+    }
+
     public PersistedObject(long version, Date createDate, Date lastUpdate) {
         this.version = version;
         this.createDate = createDate;

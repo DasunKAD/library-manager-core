@@ -15,4 +15,15 @@ public class BorrowerDetailsMapper {
         borrowerDetailsDto.setReturnDate(borrowDetails.getReturnDate().toString());
         return borrowerDetailsDto;
     }
+
+    public static BorrowDetails toEntity(BorrowerDetailsDto borrowerDetailsDto){
+        BorrowDetails borrowDetails = new BorrowDetails();
+//        borrowDetails.setBorrowDate(borrowDetails.getBorrowDate().toString());
+//        borrowDetails.setBookId(borrowDetails.getBook().getId());
+//        borrowDetails.setBorrowerId(borrowDetails.getBorrower().getId());
+//        borrowDetails.setReturnDate(borrowDetails.getReturnDate().toString());
+
+        return borrowDetails;
+
+    }
 }

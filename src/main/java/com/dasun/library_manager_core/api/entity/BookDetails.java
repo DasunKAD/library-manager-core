@@ -39,4 +39,17 @@ public class BookDetails extends PersistedObject{
 
     @OneToMany(mappedBy = "bookDetails")
     private Set<Book> bookCopies = new LinkedHashSet<>();
+
+
+    public BookDetails(long id, String isbn, String title, String author, Set<Book> bookCopies) {
+        super(id);
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.bookCopies = bookCopies;
+    }
+
+    public void addCopies(Book book) {
+        bookCopies.add(book);
+    }
 }

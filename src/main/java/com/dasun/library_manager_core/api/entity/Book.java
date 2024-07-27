@@ -29,4 +29,11 @@ public class Book extends PersistedObject{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_details_id")
     private BookDetails bookDetails;
+
+    public Book(long id, Boolean isBorrowed, Set<BorrowDetails> borrowRecords, BookDetails bookDetails) {
+        super(id);
+        this.isBorrowed = isBorrowed;
+        this.borrowRecords = borrowRecords;
+        this.bookDetails = bookDetails;
+    }
 }
