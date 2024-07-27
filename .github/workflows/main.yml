@@ -18,7 +18,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-
+          
+      - name: Ensure mvnw is executable
+        run: chmod +x ./mvnw
+      
       - name: Build JAR
         run: ./mvnw package --file pom.xml
 
