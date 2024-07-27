@@ -1,5 +1,4 @@
 # Library Management System
-# Library Management System API
 
 ## Introduction
 
