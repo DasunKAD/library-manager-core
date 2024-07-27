@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -51,5 +52,20 @@ public class BookDetails extends PersistedObject{
 
     public void addCopies(Book book) {
         bookCopies.add(book);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookDetails bookInfo = (BookDetails) o;
+        return Objects.equals(isbn, bookInfo.isbn) &&
+                Objects.equals(title, bookInfo.title) &&
+                Objects.equals(author, bookInfo.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn, title, author);
     }
 }

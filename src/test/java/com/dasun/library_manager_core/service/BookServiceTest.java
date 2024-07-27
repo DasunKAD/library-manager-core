@@ -5,7 +5,6 @@ import com.dasun.library_manager_core.api.entity.Book;
 import com.dasun.library_manager_core.api.entity.BookDetails;
 import com.dasun.library_manager_core.api.repository.BookDetailsRepository;
 import com.dasun.library_manager_core.api.repository.BookRepository;
-import com.dasun.library_manager_core.api.service.BookService;
 import com.dasun.library_manager_core.api.service.impl.BookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -166,7 +166,7 @@ class BookServiceTest {
     @Test
     void testGetBooksAvailableForBorrow_whenSomeBorrowed() {
 
-        List<Book> registeredBooks = setUpBorrowedBooks();
+        List<Book> registeredBooks = setUpBorrowedBooks().stream().filter(book -> !book.getIsBorrowed()).collect(Collectors.toList());
 
         when(bookRepository.findByIsBorrowed(Boolean.FALSE)).thenReturn(registeredBooks);
 
