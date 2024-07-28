@@ -70,8 +70,9 @@ The Library Management System API employs Spring Security for handling authentic
 [Library-managment.postman_collection.json](doc%2FLibrary-managment.postman_collection.json) user this postman collection to test the entire system.
 
 ## API Documentation
-
-Once  system is upand running Please visit [API Documentation http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- Reasy access swagger Documnetation : [https://app.swaggerhub.com/apis-docs/MADUWANTHAKAD/library-system-api/1.0](https://app.swaggerhub.com/apis-docs/MADUWANTHAKAD/library-system-api/1.0)
+- Once  system is upand running Please visit [API Documentation http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- Get swagger api json : [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
 
 ## Database Design
 ### Why PostgreSQL?
