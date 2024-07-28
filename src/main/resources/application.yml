@@ -20,3 +20,13 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+secret:
+  key: 087a3eea973b3fa367b35479c2c7f21500c798e59fd063e83ee36eaef3a09bd1
+
+error:
+  badRequest: Bad Request Invalid input provided
+  notFound: Resource Not Found The requested resource was not found
+  systemError: :System Error An unexpected error occurred
+  authenticationFailed: Authentication Failed Authentication failed due to invalid credentials
+  accessDenied: Access Denied You do not have permission to access this resource

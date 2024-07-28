@@ -18,19 +18,19 @@ public class LibrarySystemExceptionHandler extends ResponseEntityExceptionHandle
     private static final String LOG_MESSAGE_TEMPLATE = "{}: {}";
 
     // Error messages loaded from properties file with default values
-    @Value("${error.badRequest:Bad Request: Invalid input provided}")
+    @Value("${error.badRequest}")
     private String badRequestMessage;
 
-    @Value("${error.notFound:Resource Not Found: The requested resource was not found}")
+    @Value("${error.notFound}")
     private String resourceNotFoundMessage;
 
-    @Value("${error.systemError:System Error: An unexpected error occurred}")
+    @Value("${error.systemError}")
     private String systemErrorMessage;
 
-    @Value("${error.authenticationFailed:Authentication Failed: Authentication failed due to invalid credentials}")
+    @Value("${error.authenticationFailed}")
     private String authenticationFailedMessage;
 
-    @Value("${error.accessDenied:Access Denied: You do not have permission to access this resource}")
+    @Value("${error.accessDenied}")
     private String accessDeniedMessage;
 
     // Handles IllegalArgumentException and returns a 400 Bad Request response
