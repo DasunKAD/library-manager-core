@@ -176,9 +176,21 @@ class BookServiceTest {
     }
 
     @Test
-    void testGetBooksAvailableForBorrow_whenAllBorrowed() {
+    void testGetBooksAvailableForBorrow_whenNoBookRegistered() {
 
         List<Book> registeredBooks = setUpBooksForTest_Empty();
+
+        when(bookRepository.findByIsBorrowed(Boolean.FALSE)).thenReturn(registeredBooks);
+
+        List<BookDto> result = bookService.getBooksByAvailability(Boolean.FALSE);
+
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    void testGetBooksAvailableForBorrow_whenAllBorrowed() {
+
+        List<Book> registeredBooks = setUpAllBorrowedBooks().stream().filter(book -> !book.getIsBorrowed()).collect(Collectors.toList());
 
         when(bookRepository.findByIsBorrowed(Boolean.FALSE)).thenReturn(registeredBooks);
 
