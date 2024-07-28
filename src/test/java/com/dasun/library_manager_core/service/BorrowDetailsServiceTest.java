@@ -87,40 +87,6 @@ class BorrowDetailsServiceTest {
 
     }
 
-//    @Test
-//    void testBurrowBookWhenBookIsAvailable() {
-//        BorrowerDetailsDto dto = new BorrowerDetailsDto();
-//        dto.setBookId(1);
-//        dto.setBorrowerId(1);
-//        dto.setBorrowDate(CommonUtils.formatLocalDateTime(LocalDateTime.now()));
-//
-//        Book book = new Book();
-//        book.setId(1);
-//        book.setIsBorrowed(Boolean.TRUE); // The book is not available
-//
-//        Borrower borrower = new Borrower();
-//        borrower.setId(1);
-//
-//        when(bookRepository.findById(dto.getBookId())).thenReturn(Optional.of(book));
-//        when(borrowerRepository.findById(dto.getBorrowerId())).thenReturn(Optional.of(borrower));
-//        when(bookRepository.save(any(Book.class))).thenAnswer(i -> i.getArguments()[0]);
-//        when(mapper.dtoToEntity(dto)).thenReturn(new BorrowRecord());
-//        when(borrowRecordRepository.save(any(BorrowRecord.class))).thenAnswer(i -> {
-//            BorrowRecord saved = (BorrowRecord) i.getArguments()[0];
-//            saved.setId(1);
-//            return saved;
-//        });
-//
-//        BorrowRecordDTO actualDto = service.borrowBook(1, dto);
-//
-//        assertEquals(dto.getBorrowerId(), actualDto.getBorrowerId());
-//        assertEquals(dto.getBookId(), actualDto.getBookId());
-//        assertNotNull(actualDto.getBorrowDate());
-//        verify(entityManager).find(Book.class, dto.getBookId(), LockModeType.PESSIMISTIC_WRITE);
-//        verify(borrowerRepository).findById(dto.getBorrowerId());
-//        verify(borrowRecordRepository).save(any(BorrowRecord.class));
-//    }
-
     @Test
     void testReturnBook() {
         long bookId = 1;
