@@ -26,6 +26,6 @@ public class BookBorrowController {
     public ResponseEntity<BorrowerDetailsDto> returnBook(@PathVariable Integer id,
                                                       @Valid @RequestBody BorrowerDetailsDto borrowerDetailsDto) {
         borrowerDetailsDto.setBookId(id);
-        return new ResponseEntity<>(borrowDetailsService.returnBook(id, borrowerDetailsDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(borrowDetailsService.returnBook(id, borrowerDetailsDto), HttpStatus.ACCEPTED);
     }
 }
