@@ -100,7 +100,128 @@ PostgreSQL is an excellent choice for the Library Management System due to its r
    PostgreSQL supports JSON data types and functions, allowing for flexibility in handling semi-structured data. This can be advantageous if your library management system needs to store and query non-relational data alongside traditional relational data.
 
 Table Specification:
-Please reffer the bellow image for table specification
+
+# Database Schema: `library_core`
+
+## Tables and Relationships
+
+### 1. `book_details`
+**Introduction:** This table stores detailed information about each book, including its ISBN, author, and title. Each book has a unique identifier (`id`).
+
+- **Primary Key (PK):** `id`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+  - `isbn`: `varchar(25)` (not null)
+  - `author`: `varchar(255)` (not null)
+  - `title`: `varchar(255)` (not null)
+
+### 2. `book`
+**Introduction:** This table represents the instances of books in the library. It includes a reference to the `book_details` table and tracks whether each book is borrowed.
+
+- **Primary Key (PK):** `id`
+- **Foreign Key (FK):** `book_details_id` references `book_details(id)`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `is_borrowed`: `boolean` (not null)
+  - `book_details_id`: `bigint` (FK)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+
+### 3. `borrower`
+**Introduction:** This table contains information about individuals who borrow books from the library, including their name and email address.
+
+- **Primary Key (PK):** `id`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+  - `email`: `varchar(255)` (not null)
+  - `name`: `varchar(255)` (not null)
+
+### 4. `borrow_details`
+**Introduction:** This table tracks the borrowing activities, linking books to borrowers and recording the dates of borrowing and returning.
+
+- **Primary Key (PK):** `id`
+- **Foreign Keys (FK):**
+  - `book_id` references `book(id)`
+  - `borrower_id` references `borrower(id)`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `book_id`: `bigint` (FK)
+  - `borrow_date`: `timestamp(6)` (not null)
+  - `borrower_id`: `bigint` (FK)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `return_date`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+
+### 5. `group_details`
+**Introduction:** This table defines various groups within the library system, which can be used for categorizing users or roles.
+
+- **Primary Key (PK):** `id`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+  - `name`: `varchar(255)`
+
+### 6. `role`
+**Introduction:** This table defines roles within the library system, which can be assigned to users or groups to manage permissions.
+
+- **Primary Key (PK):** `id`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+  - `name`: `varchar(255)` (not null, unique)
+
+### 7. `group_roles`
+**Introduction:** This table establishes the relationship between groups and roles, defining which roles are assigned to which groups.
+
+- **Primary Key (PK):** `group_id`, `role_id`
+- **Foreign Keys (FK):**
+  - `group_id` references `group_details(id)`
+  - `role_id` references `role(id)`
+- **Columns:**
+  - `group_id`: `bigint` (FK)
+  - `role_id`: `bigint` (FK)
+
+### 8. `system_user`
+**Introduction:** This table stores information about users of the system, including their authentication details, status, and personal information.
+
+- **Primary Key (PK):** `id`
+- **Columns:**
+  - `id`: `bigint` (PK, auto-generated)
+  - `is2fa_enabled`: `boolean` (not null)
+  - `status`: `smallint` (check constraint: 0 <= status <= 4)
+  - `create_date`: `timestamp(6)`
+  - `last_update`: `timestamp(6)`
+  - `version`: `bigint` (not null)
+  - `auth_pin`: `varchar(255)`
+  - `email`: `varchar(255)`
+  - `first_name`: `varchar(255)`
+  - `last_name`: `varchar(255)`
+  - `password`: `varchar(255)`
+
+### 9. `user_groups`
+**Introduction:** This table maps users to groups, allowing for the management of group memberships within the system.
+
+- **Primary Key (PK):** `group_id`, `user_id`
+- **Foreign Keys (FK):**
+  - `group_id` references `group_details(id)`
+  - `user_id` references `system_user(id)`
+- **Columns:**
+  - `group_id`: `bigint` (FK)
+  - `user_id`: `bigint` (FK)
+
+Please reffer the bellow image for for more understanding
 ![image](doc%2Fdb-design.png) 
 
 ## Unit tests and Code Coverage
