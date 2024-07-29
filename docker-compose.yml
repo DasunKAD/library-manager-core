@@ -13,7 +13,6 @@ services:
       - "5432:5432"  # Expose PostgreSQL port
 
   app:
-    build: .  # Build the application from the Dockerfile in the current directory
     image: dasunkad/library-manager-core:0.0.7
     container_name: library-manager-core  # Name of the application container
     ports:

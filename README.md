@@ -35,13 +35,13 @@ The API uses **stateless authentication** with JSON Web Tokens (JWT) to ensure s
 - Git
 - Postman (Optional for testing)
 
-## Usage
+## Run and Access the Application
 1. Clone the project from the GitHub repository:
    git clone https://github.com/DasunKAD/library-manager-core.git
    Alternatively, you can download the project as a zip file and extract it.
 2. Navigate to the root directory of the project in your terminal.
 3. Run Docker Compose to start the containers for the application and Postgres database services:
-- docker-compose up -d --build
+- **run `docker-compose up -d`**
 - The application and Postgres database are containerized and managed with Docker Compose. The database and test data will be automatically created before starting the Spring Boot application.
 - **Default user credentials as follows**
 
@@ -51,7 +51,26 @@ The API uses **stateless authentication** with JSON Web Tokens (JWT) to ensure s
   | jane.doe@example.com | 123      |
 
 - Docker container book-manager-app-main has two services, book-manager-app for app and book-manager-db for database. 
+## Updating and Deploying Code Changes with Docker Compose
 
+To update and deploy code changes using Docker Compose, follow these steps:
+
+1. **Modify Your Code:**
+  - Make necessary changes to your code and test them locally.
+
+2. **Commit Code Changes:**
+  - Commit your changes to your Git repository and push them.
+
+3. **Create a New Release:**
+  - Tag the commit with a new version or release name and push the tag to your remote repository.
+
+4. **Update Docker Compose Configuration:**
+  - Update the Docker image tag in your `docker-compose.yml` file to reflect the new version.
+
+5. **Rebuild and Restart Containers:**
+  - Run `docker-compose up -d` to pull the updated image and restart your containers with the latest code changes.
+
+This process ensures that your Docker environment is aligned with your most recent code updates.
 ## Authentication
 
 The Library Management System API employs Spring Security for handling authentication. It uses JSON Web Tokens (JWT) to manage user sessions and secure API access. Here's how authentication works:
