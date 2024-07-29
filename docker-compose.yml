@@ -7,8 +7,6 @@ services:
       POSTGRES_PASSWORD: E5&kZ*3r^Wq7
       POSTGRES_DB: library_core
       POSTGRES_USER: postgres
-    volumes:
-      - ./db-init:/docker-entrypoint-initdb.d  # Initialize database with scripts from this directory
     ports:
       - "5432:5432"  # Expose PostgreSQL port
 
