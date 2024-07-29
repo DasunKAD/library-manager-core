@@ -37,7 +37,7 @@ The API uses **stateless authentication** with JSON Web Tokens (JWT) to ensure s
 
 ## Run and Access the Application
 1. Clone the project from the GitHub repository:
-   git clone https://github.com/DasunKAD/library-manager-core.git
+   `git clone https://github.com/DasunKAD/library-manager-core.git`
    Alternatively, you can download the project as a zip file and extract it.
 2. Navigate to the root directory of the project in your terminal.
 3. Run Docker Compose to start the containers for the application and Postgres database services:
